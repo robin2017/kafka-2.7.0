@@ -1,0 +1,26 @@
+{
+  "name": "kafka-2.7.0",
+  "version": "1.0.0",
+  "description": "desc",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "save": "git add . && git commit -m \"auto save\"",
+    "push": "npm run save && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robin2017/kafka-2.7.0.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robin2017/kafka-2.7.0/issues"
+  },
+  "homepage": "https://github.com/robin2017/kafka-2.7.0#readme"
+}

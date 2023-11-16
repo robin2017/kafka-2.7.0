@@ -24,6 +24,12 @@ buildscript {
     maven {
       url "https://plugins.gradle.org/m2/"
     }
+    maven {
+      url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    maven {
+      url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+    }
   }
   apply from: file('gradle/buildscript.gradle'), to: buildscript
   apply from: "$rootDir/gradle/dependencies.gradle"
@@ -54,6 +60,12 @@ allprojects {
 
   repositories {
     mavenCentral()
+    maven {
+      url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    maven {
+      url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+    }
   }
 
   apply plugin: 'idea'
@@ -80,19 +92,19 @@ allprojects {
       if (name != "zinc") {
         resolutionStrategy {
           force(
-            // ensure we have a single version of scala jars in the classpath, we enable inlining
-            // in the scala compiler for the `core` module so binary compatibility is only
-            // guaranteed if the exact same version of the scala jars is used for compilation
-            // and at runtime
-            libs.scalaLibrary,
-            libs.scalaReflect,
-            // ensures we have a single version of jackson-annotations in the classpath even if
-            // some modules only have a transitive reference to an older version
-            libs.jacksonAnnotations,
-            // be explicit about the Netty dependency version instead of relying on the version
-            // set by ZooKeeper (potentially older and containing CVEs)
-            libs.nettyHandler,
-            libs.nettyTransportNativeEpoll
+                  // ensure we have a single version of scala jars in the classpath, we enable inlining
+                  // in the scala compiler for the `core` module so binary compatibility is only
+                  // guaranteed if the exact same version of the scala jars is used for compilation
+                  // and at runtime
+                  libs.scalaLibrary,
+                  libs.scalaReflect,
+                  // ensures we have a single version of jackson-annotations in the classpath even if
+                  // some modules only have a transitive reference to an older version
+                  libs.jacksonAnnotations,
+                  // be explicit about the Netty dependency version instead of relying on the version
+                  // set by ZooKeeper (potentially older and containing CVEs)
+                  libs.nettyHandler,
+                  libs.nettyTransportNativeEpoll
           )
         }
       }
@@ -150,21 +162,21 @@ if (file('.git').exists()) {
     excludes = new ArrayList<String>(repo.clean(ignore: false, directories: true, dryRun: true))
     // And some of the files that we have checked in should also be excluded from this check
     excludes.addAll([
-        '**/.git/**',
-        '**/build/**',
-        'CONTRIBUTING.md',
-        'PULL_REQUEST_TEMPLATE.md',
-        'gradlew',
-        'gradlew.bat',
-        'gradle/wrapper/gradle-wrapper.properties',
-        'TROGDOR.md',
-        '**/README.md',
-        '**/id_rsa',
-        '**/id_rsa.pub',
-        'checkstyle/suppressions.xml',
-        'streams/quickstart/java/src/test/resources/projects/basic/goal.txt',
-        'streams/streams-scala/logs/*',
-        '**/generated/**'
+            '**/.git/**',
+            '**/build/**',
+            'CONTRIBUTING.md',
+            'PULL_REQUEST_TEMPLATE.md',
+            'gradlew',
+            'gradlew.bat',
+            'gradle/wrapper/gradle-wrapper.properties',
+            'TROGDOR.md',
+            '**/README.md',
+            '**/id_rsa',
+            '**/id_rsa.pub',
+            'checkstyle/suppressions.xml',
+            'streams/quickstart/java/src/test/resources/projects/basic/goal.txt',
+            'streams/streams-scala/logs/*',
+            '**/generated/**'
     ])
   }
 }
@@ -212,31 +224,31 @@ subprojects {
   uploadArchives {
     repositories {
       signing {
-          required { shouldSign }
-          sign configurations.archives
+        required { shouldSign }
+        sign configurations.archives
 
-          // To test locally, replace mavenUrl in ~/.gradle/gradle.properties to file://localhost/tmp/myRepo/
-          mavenDeployer {
-              beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-              repository(url: "${mavenUrl}") {
-                  authentication(userName: "${mavenUsername}", password: "${mavenPassword}")
-              }
-              afterEvaluate {
-                  pom.artifactId = "${archivesBaseName}"
-                  pom.project {
-                      name 'Apache Kafka'
-                      packaging 'jar'
-                      url 'https://kafka.apache.org'
-                      licenses {
-                          license {
-                              name 'The Apache Software License, Version 2.0'
-                              url 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                              distribution 'repo'
-                          }
-                      }
-                  }
-              }
+        // To test locally, replace mavenUrl in ~/.gradle/gradle.properties to file://localhost/tmp/myRepo/
+        mavenDeployer {
+          beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+          repository(url: "${mavenUrl}") {
+            authentication(userName: "${mavenUsername}", password: "${mavenPassword}")
           }
+          afterEvaluate {
+            pom.artifactId = "${archivesBaseName}"
+            pom.project {
+              name 'Apache Kafka'
+              packaging 'jar'
+              url 'https://kafka.apache.org'
+              licenses {
+                license {
+                  name 'The Apache Software License, Version 2.0'
+                  url 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                  distribution 'repo'
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -388,7 +400,7 @@ subprojects {
       exceptionFormat = testExceptionFormat
     }
     logTestStdout.rehydrate(delegate, owner, this)()
-    
+
     // The suites are for running sets of tests in IDEs.
     // Gradle will run each test class, so we exclude the suites to avoid redundantly running the tests twice.
     exclude '**/*Suite.class'
@@ -486,26 +498,26 @@ subprojects {
 
   tasks.withType(ScalaCompile) {
     scalaCompileOptions.additionalParameters = [
-      "-deprecation",
-      "-unchecked",
-      "-encoding", "utf8",
-      "-Xlog-reflective-calls",
-      "-feature",
-      "-language:postfixOps",
-      "-language:implicitConversions",
-      "-language:existentials",
-      "-Xlint:constant",
-      "-Xlint:delayedinit-select",
-      "-Xlint:doc-detached",
-      "-Xlint:missing-interpolator",
-      "-Xlint:nullary-unit",
-      "-Xlint:option-implicit",
-      "-Xlint:package-object-classes",
-      "-Xlint:poly-implicit-overload",
-      "-Xlint:private-shadow",
-      "-Xlint:stars-align",
-      "-Xlint:type-parameter-shadow",
-      "-Xlint:unused"
+            "-deprecation",
+            "-unchecked",
+            "-encoding", "utf8",
+            "-Xlog-reflective-calls",
+            "-feature",
+            "-language:postfixOps",
+            "-language:implicitConversions",
+            "-language:existentials",
+            "-Xlint:constant",
+            "-Xlint:delayedinit-select",
+            "-Xlint:doc-detached",
+            "-Xlint:missing-interpolator",
+            "-Xlint:nullary-unit",
+            "-Xlint:option-implicit",
+            "-Xlint:package-object-classes",
+            "-Xlint:poly-implicit-overload",
+            "-Xlint:private-shadow",
+            "-Xlint:stars-align",
+            "-Xlint:type-parameter-shadow",
+            "-Xlint:unused"
     ]
 
     // Inline more aggressively when compiling the `core` jar since it's not meant to be used as a library.
@@ -534,9 +546,9 @@ subprojects {
     // Scala 2.13 removes them, see https://github.com/scala/scala/pull/6502 and https://github.com/scala/scala/pull/5969
     if (versions.baseScala == '2.12') {
       scalaCompileOptions.additionalParameters += [
-        "-Xlint:by-name-right-associative",
-        "-Xlint:nullary-override",
-        "-Xlint:unsound-match"
+              "-Xlint:by-name-right-associative",
+              "-Xlint:nullary-override",
+              "-Xlint:unsound-match"
       ]
     }
 
@@ -710,14 +722,14 @@ if (userEnableTestCoverage) {
 }
 
 def connectPkgs = [
-    'connect:api',
-    'connect:basic-auth-extension',
-    'connect:file',
-    'connect:json',
-    'connect:runtime',
-    'connect:transforms',
-    'connect:mirror',
-    'connect:mirror-client'
+        'connect:api',
+        'connect:basic-auth-extension',
+        'connect:file',
+        'connect:json',
+        'connect:runtime',
+        'connect:transforms',
+        'connect:mirror',
+        'connect:mirror-client'
 ]
 
 tasks.create(name: "jarConnect", dependsOn: connectPkgs.collect { it + ":jar" }) {}
@@ -728,7 +740,7 @@ project(':core') {
   println "Building project 'core' with Scala version ${versions.scala}"
 
   apply plugin: 'scala'
-  
+
   // scaladoc generation is configured at the sub-module level with an artifacts
   // block (cf. see streams-scala). If scaladoc generation is invoked explicitly
   // for the `core` module, this ensures the generated jar doesn't include scaladoc
@@ -764,6 +776,10 @@ project(':core') {
     compile libs.commonsCli
 
     compileOnly libs.log4j
+
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
 
     testCompile project(':clients').sourceSets.test.output
     testCompile libs.bcpkix
@@ -961,7 +977,7 @@ project(':core') {
 
   jar.manifest {
     attributes(
-      'Version': "${version}"
+            'Version': "${version}"
     )
   }
 
@@ -1056,8 +1072,8 @@ project(':clients') {
     outputs.upToDateWhen { false }
     doLast {
       def data = [
-        commitId: commitId,
-        version: version,
+              commitId: commitId,
+              version: version,
       ]
 
       receiptFile.parentFile.mkdirs()
@@ -1069,7 +1085,7 @@ project(':clients') {
   jar {
     dependsOn createVersionFile
     from("$buildDir") {
-        include "kafka/$buildVersionFileName"
+      include "kafka/$buildVersionFileName"
     }
   }
 
@@ -1085,7 +1101,7 @@ project(':clients') {
              "-i", "src/main/resources/common/message",
              "-t", "ApiMessageTypeGenerator",
              "-m", "MessageDataGenerator", "JsonConverterGenerator"
-           ]
+    ]
     inputs.dir("src/main/resources/common/message")
     outputs.dir("src/generated/java/org/apache/kafka/common/message")
   }
@@ -1097,7 +1113,7 @@ project(':clients') {
              "-o", "src/generated-test/java/org/apache/kafka/common/message",
              "-i", "src/test/resources/common/message",
              "-m", "MessageDataGenerator", "JsonConverterGenerator"
-           ]
+    ]
     inputs.dir("src/test/resources/common/message")
     outputs.dir("src/generated-test/java/org/apache/kafka/common/message")
   }
@@ -1167,8 +1183,8 @@ project(':raft') {
     outputs.upToDateWhen { false }
     doLast {
       def data = [
-        commitId: commitId,
-        version: version,
+              commitId: commitId,
+              version: version,
       ]
 
       receiptFile.parentFile.mkdirs()
@@ -1200,13 +1216,13 @@ project(':raft') {
       }
     }
   }
-  
+
   compileJava.dependsOn 'processMessages'
 
   jar {
     dependsOn createVersionFile
     from("$buildDir") {
-        include "kafka/$buildVersionFileName"
+      include "kafka/$buildVersionFileName"
     }
   }
 
@@ -1309,7 +1325,7 @@ project(':streams') {
              "-o", "src/generated/java/org/apache/kafka/streams/internals/generated",
              "-i", "src/main/resources/common/message",
              "-m", "MessageDataGenerator"
-           ]
+    ]
     inputs.dir("src/main/resources/common/message")
     outputs.dir("src/generated/java/org/apache/kafka/streams/internals/generated")
   }
@@ -1383,25 +1399,25 @@ project(':streams') {
   }
 
   task testAll(
-    dependsOn: [
-            ':streams:test',
-            ':streams:test-utils:test',
-            ':streams:streams-scala:test',
-            ':streams:upgrade-system-tests-0100:test',
-            ':streams:upgrade-system-tests-0101:test',
-            ':streams:upgrade-system-tests-0102:test',
-            ':streams:upgrade-system-tests-0110:test',
-            ':streams:upgrade-system-tests-10:test',
-            ':streams:upgrade-system-tests-11:test',
-            ':streams:upgrade-system-tests-20:test',
-            ':streams:upgrade-system-tests-21:test',
-            ':streams:upgrade-system-tests-22:test',
-            ':streams:upgrade-system-tests-23:test',
-            ':streams:upgrade-system-tests-24:test',
-            ':streams:upgrade-system-tests-25:test',
-            ':streams:upgrade-system-tests-26:test',
-            ':streams:examples:test'
-    ]
+          dependsOn: [
+                  ':streams:test',
+                  ':streams:test-utils:test',
+                  ':streams:streams-scala:test',
+                  ':streams:upgrade-system-tests-0100:test',
+                  ':streams:upgrade-system-tests-0101:test',
+                  ':streams:upgrade-system-tests-0102:test',
+                  ':streams:upgrade-system-tests-0110:test',
+                  ':streams:upgrade-system-tests-10:test',
+                  ':streams:upgrade-system-tests-11:test',
+                  ':streams:upgrade-system-tests-20:test',
+                  ':streams:upgrade-system-tests-21:test',
+                  ':streams:upgrade-system-tests-22:test',
+                  ':streams:upgrade-system-tests-23:test',
+                  ':streams:upgrade-system-tests-24:test',
+                  ':streams:upgrade-system-tests-25:test',
+                  ':streams:upgrade-system-tests-26:test',
+                  ':streams:examples:test'
+          ]
   )
 }
 
@@ -1715,14 +1731,14 @@ project(':jmh-benchmarks') {
 
     doFirst {
       if (System.getProperty("jmhArgs")) {
-          args System.getProperty("jmhArgs").split(' ')
+        args System.getProperty("jmhArgs").split(' ')
       }
       args = [shadowJar.archivePath, *args]
     }
   }
 
   javadoc {
-     enabled = false
+    enabled = false
   }
 }
 

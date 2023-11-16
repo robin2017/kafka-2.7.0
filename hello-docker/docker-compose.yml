@@ -1,0 +1,38 @@
+version: '3.5'
+networks:
+  zk-net:  # 网络名
+    name: zk-net
+    driver: bridge
+services:
+  zk:
+    image: wurstmeister/zookeeper
+    container_name: zk
+    restart: always
+    hostname: 10.36.8.171
+    ports:
+      - 2181:2181
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=10.36.8.171:2888:3888;2181
+    networks:
+      - zk-net
+  zkui:
+    image: juris/zkui
+    container_name: zkui
+    depends_on:
+      - zk
+    ports:
+      - "9090:9090"
+    environment:
+      ZK_SERVER: 10.36.8.171:2181
+    restart: always
+
+  kafka1-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka1-ui
+    restart: always
+    ports:
+      - 18080:8080
+    environment:
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 10.36.8.171:9092
+   
