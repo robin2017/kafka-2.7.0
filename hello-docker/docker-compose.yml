@@ -8,12 +8,13 @@ services:
     image: wurstmeister/zookeeper
     container_name: zk
     restart: always
-    hostname: 192.168.3.104
+    # can use env variables
+    hostname: 192.168.12.159
     ports:
       - 2181:2181
     environment:
       ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=192.168.3.104:2888:3888;2181
+      ZOO_SERVERS: server.1=192.168.12.159:2888:3888;2181
     networks:
       - zk-net
   zkui:
@@ -24,7 +25,7 @@ services:
     ports:
       - "9090:9090"
     environment:
-      ZK_SERVER: 192.168.3.104:2181
+      ZK_SERVER: 192.168.12.159:2181
     restart: always
 
   kafka1-ui:
@@ -34,5 +35,5 @@ services:
     ports:
       - 18080:8080
     environment:
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 192.168.3.104:9092
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 192.168.12.159:9092
    

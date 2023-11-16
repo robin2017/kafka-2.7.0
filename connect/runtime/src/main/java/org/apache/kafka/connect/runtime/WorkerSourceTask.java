@@ -251,7 +251,7 @@ class WorkerSourceTask extends WorkerTask {
                 maybeThrowProducerSendException();
 
                 if (toSend == null) {
-                    log.trace("{} Nothing to send to Kafka. Polling source for additional records", this);
+                    log.info("{} Nothing to send to Kafka. Polling source for additional records", this);
                     long start = time.milliseconds();
                     toSend = poll();
                     if (toSend != null) {
@@ -260,7 +260,7 @@ class WorkerSourceTask extends WorkerTask {
                 }
                 if (toSend == null)
                     continue;
-                log.trace("{} About to send {} records to Kafka", this, toSend.size());
+                log.info("{} About to send {} records to Kafka", this, toSend.size());
                 if (!sendRecords())
                     stopRequestedLatch.await(SEND_FAILED_BACKOFF_MS, TimeUnit.MILLISECONDS);
             }
@@ -344,7 +344,7 @@ class WorkerSourceTask extends WorkerTask {
                 continue;
             }
 
-            log.trace("{} Appending record with key {}, value {}", this, record.key(), record.value());
+            log.info("{} Appending record with key {}, value {}", this, record.key(), record.value());
             // We need this queued first since the callback could happen immediately (even synchronously in some cases).
             // Because of this we need to be careful about handling retries -- we always save the previously attempted
             // record as part of toSend and need to use a flag to track whether we should actually add it to the outstanding
@@ -368,12 +368,12 @@ class WorkerSourceTask extends WorkerTask {
                     (recordMetadata, e) -> {
                         if (e != null) {
                             log.error("{} failed to send record to {}: ", WorkerSourceTask.this, topic, e);
-                            log.debug("{} Failed record: {}", WorkerSourceTask.this, preTransformRecord);
+                            log.info("{} Failed record: {}", WorkerSourceTask.this, preTransformRecord);
                             producerSendException.compareAndSet(null, e);
                         } else {
                             recordSent(producerRecord);
                             counter.completeRecord();
-                            log.trace("{} Wrote record successfully: topic {} partition {} offset {}",
+                            log.info("{} Wrote record successfully: topic {} partition {} offset {}",
                                     WorkerSourceTask.this,
                                     recordMetadata.topic(), recordMetadata.partition(),
                                     recordMetadata.offset());
@@ -422,7 +422,7 @@ class WorkerSourceTask extends WorkerTask {
 
         log.info("Creating topic '{}'", topic);
         TopicCreationGroup topicGroup = topicCreation.findFirstGroup(topic);
-        log.debug("Topic '{}' matched topic creation group: {}", topic, topicGroup);
+        log.info("Topic '{}' matched topic creation group: {}", topic, topicGroup);
         NewTopic newTopic = topicGroup.newTopic(topic);
 
         if (admin.createTopic(newTopic)) {
@@ -523,7 +523,7 @@ class WorkerSourceTask extends WorkerTask {
                 finishSuccessfulFlush();
                 long durationMillis = time.milliseconds() - started;
                 recordCommitSuccess(durationMillis);
-                log.debug("{} Finished offset commitOffsets successfully in {} ms",
+                log.info("{} Finished offset commitOffsets successfully in {} ms",
                         this, durationMillis);
 
                 commitSourceTask();
@@ -536,7 +536,7 @@ class WorkerSourceTask extends WorkerTask {
             if (error != null) {
                 log.error("{} Failed to flush offsets to storage: ", WorkerSourceTask.this, error);
             } else {
-                log.trace("{} Finished flushing offsets to storage", WorkerSourceTask.this);
+                log.info("{} Finished flushing offsets to storage", WorkerSourceTask.this);
             }
         });
         // Very rare case: offsets were unserializable and we finished immediately, unable to store

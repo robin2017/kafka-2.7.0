@@ -12,6 +12,8 @@
     - [重启](#重启)
     - [加断点](#加断点)
       - [将file包四个文件复制到runtime包中，可以调试](#将file包四个文件复制到runtime包中可以调试)
+    - [日志](#日志)
+  - [文件连接器调试](#文件连接器调试)
 
 
 [聊聊 Kafka：编译 Kafka 源码并搭建源码环境](https://xie.infoq.cn/article/6fd06714623437ebed2f43a47)
@@ -52,7 +54,7 @@
 ### 验证
 ```
 cd bin
-./kafka-topics.sh --zookeeper 192.168.3.104:2181 --create --topic topic_test --partitions 1 --replication-factor 1
+./kafka-topics.sh --zookeeper 192.168.12.159:2181 --create --topic topic_test --partitions 1 --replication-factor 1
 ```
 
 ![picture 4](images/55947cfdfe0b454a668896588d0ce2c8b0cea952eb46b0fe76b539d3feb32983.png)  
@@ -63,12 +65,6 @@ cd bin
 + 创建文件夹~/kafka-source-logs
 
 ```
-# 创建测试用的topic
-npm run create-topic
-# 启动连接器
-npm run connector-start
-# rest注册
-npm run connector-register-sink
 # 写入数据
 npm run source-input
 ```
@@ -97,3 +93,11 @@ npm run source-input
 #### 将file包四个文件复制到runtime包中，可以调试
 
 ![picture 12](images/e3b6c9b4d75364397fd09c07dda0a255a7614a9f38eb332bc552d0f41c1e00d2.png)  
+
+### 日志
+
+![picture 13](images/77d4a44e710eb50fec83ff245c2f87d5251a5a70e58dd2144c1c9b67647abbfe.png)  
+
+
+## 文件连接器调试
+[参见代码仓库](https://gitee.com/wangy202012/spring-source-learning/blob/master/doc/kafka-connector.md)

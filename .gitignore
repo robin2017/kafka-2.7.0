@@ -61,3 +61,4 @@ raft/src/generated
 hello-kafka-logs/
 hello-data/sink.txt
 hello-data/source.txt
+error.log

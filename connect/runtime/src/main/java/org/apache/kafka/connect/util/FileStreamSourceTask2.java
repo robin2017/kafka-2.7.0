@@ -86,7 +86,7 @@ public class FileStreamSourceTask2 extends SourceTask {
                     if (lastRecordedOffset != null && !(lastRecordedOffset instanceof Long))
                         throw new ConnectException("Offset position is the incorrect type");
                     if (lastRecordedOffset != null) {
-                        log.debug("Found previous offset, trying to skip to file offset {}", lastRecordedOffset);
+                        log.info("Found previous offset, trying to skip to file offset {}", lastRecordedOffset);
                         long skipLeft = (Long) lastRecordedOffset;
                         while (skipLeft > 0) {
                             try {
@@ -97,14 +97,14 @@ public class FileStreamSourceTask2 extends SourceTask {
                                 throw new ConnectException(e);
                             }
                         }
-                        log.debug("Skipped to offset {}", lastRecordedOffset);
+                        log.info("Skipped to offset {}", lastRecordedOffset);
                     }
                     streamOffset = (lastRecordedOffset != null) ? (Long) lastRecordedOffset : 0L;
                 } else {
                     streamOffset = 0L;
                 }
                 reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
-                log.debug("Opened {} for reading", logFilename());
+                log.info("Opened {} for reading", logFilename());
             } catch (NoSuchFileException e) {
                 log.warn("Couldn't find file {} for FileStreamSourceTask, sleeping to wait for it to be created", logFilename());
                 synchronized (this) {
@@ -133,7 +133,7 @@ public class FileStreamSourceTask2 extends SourceTask {
             int nread = 0;
             while (readerCopy.ready()) {
                 nread = readerCopy.read(buffer, offset, buffer.length - offset);
-                log.trace("Read {} bytes from {}", nread, logFilename());
+                log.info("Read {} bytes from {}", nread, logFilename());
 
                 if (nread > 0) {
                     offset += nread;
@@ -147,7 +147,7 @@ public class FileStreamSourceTask2 extends SourceTask {
                     do {
                         line = extractLine();
                         if (line != null) {
-                            log.trace("Read a line from {}", logFilename());
+                            log.info("Read a line from {}", logFilename());
                             if (records == null)
                                 records = new ArrayList<>();
                             records.add(new SourceRecord(offsetKey(filename), offsetValue(streamOffset), topic, null,
@@ -206,12 +206,12 @@ public class FileStreamSourceTask2 extends SourceTask {
 
     @Override
     public void stop() {
-        log.trace("Stopping");
+        log.info("Stopping");
         synchronized (this) {
             try {
                 if (stream != null && stream != System.in) {
                     stream.close();
-                    log.trace("Closed input stream");
+                    log.info("Closed input stream");
                 }
             } catch (IOException e) {
                 log.error("Failed to close FileStreamSourceTask stream: ", e);
