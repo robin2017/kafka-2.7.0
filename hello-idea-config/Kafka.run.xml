@@ -2,7 +2,7 @@
   <configuration default="false" name="Kafka" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="kafka.Kafka" />
     <module name="kafka-2.7.0.core.main" />
-    <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/config/server.properties"  />
+    <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/config/server.properties" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="kafka.*" />

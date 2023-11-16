@@ -58,4 +58,6 @@ jmh-benchmarks/src/main/generated
 streams/src/generated
 raft/src/generated
 
-kafka-logs/
+hello-kafka-logs/
+hello-data/sink.txt
+hello-data/source.txt

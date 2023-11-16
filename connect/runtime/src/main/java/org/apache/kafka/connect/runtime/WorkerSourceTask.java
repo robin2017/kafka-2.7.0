@@ -476,6 +476,7 @@ class WorkerSourceTask extends WorkerTask {
         long commitTimeoutMs = workerConfig.getLong(WorkerConfig.OFFSET_COMMIT_TIMEOUT_MS_CONFIG);
 
         log.info("{} Committing offsets", this);
+        log.info("this is robin info");
 
         long started = time.milliseconds();
         long timeout = started + commitTimeoutMs;
