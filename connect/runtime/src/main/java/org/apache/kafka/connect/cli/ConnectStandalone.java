@@ -62,7 +62,10 @@ public class ConnectStandalone {
         String[] args = new String[]{
                 "/Users/luobin3/workspace/kafka-2.7.0/config/robin-connect-standalone.properties",
                 "/Users/luobin3/workspace/kafka-2.7.0/config/robin-connect-file-source.properties",
-                "/Users/luobin3/workspace/kafka-2.7.0/config/robin-connect-file-sink.properties"};
+                "/Users/luobin3/workspace/kafka-2.7.0/config/robin-connect-file-sink.properties",
+                "/Users/luobin3/workspace/kafka-2.7.0/config/robin-connect-zeebe-source.properties",
+                "/Users/luobin3/workspace/kafka-2.7.0/config/robin-connect-zeebe-sink.properties",
+        };
         log.info("连接器启动参数:::{},{},{}", args.length, args[0], args[1]);
         if (args.length < 2 || Arrays.asList(args).contains("--help")) {
             log.info("Usage: ConnectStandalone worker.properties connector1.properties [connector2.properties ...]");
