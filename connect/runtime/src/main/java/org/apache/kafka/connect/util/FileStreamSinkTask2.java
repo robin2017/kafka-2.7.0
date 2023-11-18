@@ -76,14 +76,14 @@ public class FileStreamSinkTask2 extends SinkTask {
     @Override
     public void put(Collection<SinkRecord> sinkRecords) {
         for (SinkRecord record : sinkRecords) {
-            log.trace("Writing line to {}: {}", logFilename(), record.value());
+            log.info("Writing line to {}: {}", logFilename(), record.value());
             outputStream.println(record.value());
         }
     }
 
     @Override
     public void flush(Map<TopicPartition, OffsetAndMetadata> offsets) {
-        log.trace("Flushing output stream for {}", logFilename());
+        log.info("Flushing output stream for {}", logFilename());
         outputStream.flush();
     }
 

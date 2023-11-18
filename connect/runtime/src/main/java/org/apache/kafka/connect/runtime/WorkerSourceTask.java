@@ -251,7 +251,8 @@ class WorkerSourceTask extends WorkerTask {
                 maybeThrowProducerSendException();
 
                 if (toSend == null) {
-                    log.info("{} Nothing to send to Kafka. Polling source for additional records", this);
+                    // 调试source源码再打开
+//                    log.info("{} Nothing to send to Kafka. Polling source for additional records", this);
                     long start = time.milliseconds();
                     toSend = poll();
                     if (toSend != null) {
