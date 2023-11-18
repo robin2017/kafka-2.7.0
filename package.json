@@ -14,7 +14,7 @@
     "clear": "rm -rf hello-kafka-logs",
     "restart": "cd hello-docker && npm run restart",
     "desc": "按照顺序依次执行",
-    "create-topic": "cd bin && ./kafka-topics.sh --zookeeper 192.168.12.159:2181 --create --topic topic-connect --partitions 1 --replication-factor 1",
+    "create-topic": "cd bin && ./kafka-topics.sh --zookeeper 192.168.3.104:2181 --create --topic topic-connect --partitions 1 --replication-factor 1",
     "connector-start": "cd bin && ./connect-standalone.sh ../config/robin-connect-standalone.properties ../config/robin-connect-file-source.properties",
     "connector-start-simple": "cd bin && ./connect-standalone.sh a b",
     "connector-register-sink": "curl -X POST -H \"Content-Type: application/json\" --data @./config/robin-connect-file-sink.json http://localhost:8083/connectors",
