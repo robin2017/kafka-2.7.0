@@ -13,7 +13,8 @@
     - [启动kafka和connector](#启动kafka和connector)
       - [验证](#验证-1)
     - [modeler部署bpmn](#modeler部署bpmn)
-      - [验证](#验证-2)
+      - [验证1：source成功，sink失败](#验证1source成功sink失败)
+      - [验证2:](#验证2)
 
 
 ## 启动docker
@@ -86,12 +87,23 @@ npm run restart
 
 ### modeler部署bpmn
 + bpmn文件在hello-data目录下
++ 运行实例的正确参数如下
+
+```
+{"key":2,"name":"pong","payload":{"foo":"bar"}}
+```
 
 ![picture 14](../images/bde53303cbd688a8c1cd059bb3d6d5651ddd9f7ceaeb3c62d0cb349984e63857.png)  
 ![picture 15](../images/598d179653d6e808c62f6e387f24334c37f0789a40aa7e90fb695cd78a48e2ab.png)  
 ![picture 17](../images/f08510640377975907dddfd122577ab44258a301b508d338963fd9fde08a1158.png)  
 
 
-#### 验证
+#### 验证1：source成功，sink失败
 + 目前验证source成功了，还需要再验证下sink！！！
++ 因为传递参数不对，所以没有执行sink
 ![picture 16](../images/db6597fbcbfd930f098f278875ced5746c2ac28d78f490366bd5d36303c1a102.png)  
+
+#### 验证2:
++ 因为第一次参数传递错误，导致整个流程需要重新跑一遍！！！
+![picture 18](../images/c21e9740c7b7dce0a032bd04fa2b51076adaed82bfa42da34ff5676cde2fd3cb.png)  
+![picture 19](../images/66916e9d0e96c2b51c17658ed18d21cc6caa6f817c70bc53e7773e0c9bb2989d.png)  
