@@ -4,17 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clear":"rm -rf zk-data kafka1-logs kafka2-logs kafka3-logs",
-    "start": "npm run clear && docker-compose up -d",
-    "down":"docker-compose down && npm run clear",
-    "restart":"npm run down && npm run start",
-    "source-input":"cd data && echo \"hello,source demo\" >> source.txt",
-    "source-robin-input":"cd data && echo \"hello,robin source demo\" >> robin-source.txt",
-    "sink-config":"curl -X POST -H \"Content-Type: application/json\" --data @./config/connect-file-sink.json http://localhost:18083/connectors",
-    "source-custom-config":"curl -X POST -H \"Content-Type: application/json\" --data @./config/connect-custom-source.json http://localhost:18083/connectors",
-    "sink-custom-config":"curl -X POST -H \"Content-Type: application/json\" --data @./config/connect-custom-sink.json http://localhost:18083/connectors"
+    "start": "docker-compose up -d",
+    "down":"docker-compose down",
+    "restart":"npm run down && npm run start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC"
 }
+
+
+
+
