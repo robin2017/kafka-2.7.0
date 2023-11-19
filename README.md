@@ -54,7 +54,7 @@
 ### 验证
 ```
 cd bin
-./kafka-topics.sh --zookeeper 192.168.3.104:2181 --create --topic topic_test --partitions 1 --replication-factor 1
+./kafka-topics.sh --zookeeper 192.168.12.159:2181 --create --topic topic_test --partitions 1 --replication-factor 1
 ```
 
 ![picture 4](images/55947cfdfe0b454a668896588d0ce2c8b0cea952eb46b0fe76b539d3feb32983.png)  
