@@ -1886,7 +1886,9 @@ project(':connect:json') {
 project(':connect:runtime') {
   archivesBaseName = "connect-runtime"
 
+
   dependencies {
+//    implementation platform('io.camunda:zeebe-parent:8.2.15-SNAPSHOT')
 
     compile project(':connect:api')
     compile project(':clients')
@@ -1895,6 +1897,7 @@ project(':connect:runtime') {
     compile project(':connect:transforms')
 
     compile group: 'io.camunda', name: 'zeebe-client-java', version: '8.1.9'
+//    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.14.2'
     compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.7.0'
     compile libs.slf4jApi
     compile libs.jacksonJaxrsJsonProvider
