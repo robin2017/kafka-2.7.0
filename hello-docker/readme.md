@@ -13,6 +13,7 @@
     - [启动kafka和connector](#启动kafka和connector)
       - [验证](#验证-1)
     - [modeler部署bpmn](#modeler部署bpmn)
+      - [验证](#验证-2)
 
 
 ## 启动docker
@@ -86,3 +87,8 @@ npm run restart
 ### modeler部署bpmn
 + bpmn文件在hello-data目录下
 
+![picture 14](../images/bde53303cbd688a8c1cd059bb3d6d5651ddd9f7ceaeb3c62d0cb349984e63857.png)  
+![picture 15](../images/598d179653d6e808c62f6e387f24334c37f0789a40aa7e90fb695cd78a48e2ab.png)  
+
+#### 验证
+![picture 16](../images/db6597fbcbfd930f098f278875ced5746c2ac28d78f490366bd5d36303c1a102.png)  
