@@ -13,6 +13,7 @@
     "push": "npm run save && git push",
     "clear": "rm -rf hello-kafka-logs",
     "restart": "cd hello-docker && npm run restart",
+    "start": "cd hello-docker && npm run start",
     "desc": "按照顺序依次执行",
     "create-topic": "cd bin && ./kafka-topics.sh --zookeeper 192.168.12.159:2181 --create --topic topic-connect --partitions 1 --replication-factor 1",
     "connector-start": "cd bin && ./connect-standalone.sh ../config/robin-connect-standalone.properties ../config/robin-connect-file-source.properties",
