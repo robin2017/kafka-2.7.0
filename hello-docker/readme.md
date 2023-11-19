@@ -9,6 +9,9 @@
   - [完整部署流程](#完整部署流程)
     - [清理](#清理)
     - [启动docker](#启动docker-1)
+      - [验证](#验证)
+    - [启动kafka和connector](#启动kafka和connector)
+      - [验证](#验证-1)
 
 
 ## 启动docker
@@ -56,5 +59,26 @@ npm run restart
 
 ### 启动docker
 + npm run start
+
+#### 验证
++ 查看zeebe是否成功
+
+
+![picture 8](../images/57740c616de36b6b8fac91f1e0936a7e75c4a5ad46b01b7f619eeb9da0cd81e0.png)  
+![picture 12](../images/bbe62c5bbbcddf1e87c86583bba26949bd5e4c9ae3f3936b2a6e7375920487bb.png)  
+
+
+### 启动kafka和connector
++ 按照顺序启动akfka和connector
+
+#### 验证
++ 查看两个服务是否启动成功
++ 通过kafka-ui查看broker和topic信息
+
+
+![picture 9](../images/9a33d3ae92c793c31ac95693fd29ed8694c32bd5a58c8b6ff1580e8f8ed5ba5a.png)  
+![picture 10](../images/302619f767ec47648dd33e2c83fb264c050c9fdf28ee8c3f94ba920084c9b00d.png)  
+![picture 11](../images/cb3fac9887a6bf6c1493401ae23685ddff8caadb9aa75b4cd2dbbc027e5ffb03.png)  
+![picture 13](../images/f644bad3ddf6abfe2cb7127a7f806514b5f1cb80f946c9f4296f01f7205608d4.png)  
 
 
