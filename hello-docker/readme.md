@@ -14,7 +14,7 @@
       - [验证](#验证-1)
     - [modeler部署bpmn](#modeler部署bpmn)
       - [验证1：source成功，sink失败](#验证1source成功sink失败)
-      - [验证2:](#验证2)
+      - [验证2:source/sink都成功了](#验证2sourcesink都成功了)
 
 
 ## 启动docker
@@ -103,7 +103,9 @@ npm run restart
 + 因为传递参数不对，所以没有执行sink
 ![picture 16](../images/db6597fbcbfd930f098f278875ced5746c2ac28d78f490366bd5d36303c1a102.png)  
 
-#### 验证2:
+#### 验证2:source/sink都成功了
 + 因为第一次参数传递错误，导致整个流程需要重新跑一遍！！！
 ![picture 18](../images/c21e9740c7b7dce0a032bd04fa2b51076adaed82bfa42da34ff5676cde2fd3cb.png)  
 ![picture 19](../images/66916e9d0e96c2b51c17658ed18d21cc6caa6f817c70bc53e7773e0c9bb2989d.png)  
+
+![picture 20](../images/4356f7b9dbb8a281a79960d2142e038db56f562907a0e9cc939eba8007f282d1.png)  
