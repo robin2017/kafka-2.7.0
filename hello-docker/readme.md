@@ -89,6 +89,8 @@ npm run restart
 
 ![picture 14](../images/bde53303cbd688a8c1cd059bb3d6d5651ddd9f7ceaeb3c62d0cb349984e63857.png)  
 ![picture 15](../images/598d179653d6e808c62f6e387f24334c37f0789a40aa7e90fb695cd78a48e2ab.png)  
+![picture 17](../images/f08510640377975907dddfd122577ab44258a301b508d338963fd9fde08a1158.png)  
+
 
 #### 验证
 + 目前验证source成功了，还需要再验证下sink！！！
