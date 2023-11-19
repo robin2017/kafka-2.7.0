@@ -34,4 +34,10 @@ npm run restart
 
 
 ## 部署bpmn
++ 使用modeler部署，很方便
+![picture 3](../images/b29ebc14df6cb76603cfe71f2d8b9660cab66d6beef9d0d93787e0250ad69052.png)  
 
+![picture 4](../images/d0aa9a11c7c3900ffb74384234e532c517937da028a11430e6be4d6eacf40297.png)  
+![picture 5](../images/cc1d8fff8717b95680c3b5ebb8111badfeb854429cf49f253cffb5abc1e2c1ab.png)  
+![picture 6](../images/56ddeb47b105324069d6cb49944fcfd942ac0fd6d62e8891d4cb1905c26ed33a.png)  
+![picture 7](../images/374ac506dca421fd6fa6b3f353728dc3a656f44cb392dc7c7094ecfb0ade09ba.png)  
