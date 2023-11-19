@@ -1887,9 +1887,10 @@ project(':connect:runtime') {
   archivesBaseName = "connect-runtime"
 
 
+
   dependencies {
 //    implementation platform('io.camunda:zeebe-parent:8.2.15-SNAPSHOT')
-
+    compile fileTree(dir: 'src/main/resources/jar',includes: ['*jar'])
     compile project(':connect:api')
     compile project(':clients')
     compile project(':tools')
